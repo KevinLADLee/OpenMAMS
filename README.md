@@ -1,10 +1,8 @@
 <div align="center">
 
-# OpenMAMS
-# Open-Sourced Multi-Agent Memory System
+# OpenMAMS: Open-Sourced Multi-Agent Memory System
 
-### Memory in the Sky: 
-### Low-Altitude Question Answering with Multi-Agent Memory Aggregation
+### Memory in the Sky: Low-Altitude Question Answering with Multi-Agent Memory Aggregation
 
 Chengyang Li<sup>1</sup>, Yujie Wan<sup>2</sup>, Shuai Wang<sup>3</sup>, Kejiang Ye<sup>3</sup>, Weijie Yuan<sup>2</sup>, Boyu Zhou<sup>2</sup>, Yik-Chung Wu<sup>1</sup>, Chengzhong Xu<sup>4</sup>, and Huseyin Arslan<sup>5</sup>
 
