@@ -10,13 +10,13 @@ Chengyang Li<sup>1</sup>, Yujie Wan<sup>2</sup>, Shuai Wang<sup>3</sup>, Kejiang
 <sup>3</sup>Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences<br>
 <sup>4</sup>University of Macau · <sup>5</sup>Istanbul Medipol University
 
-[Overview](#overview) · [Architecture](#architecture) · [Real-World Experiments](#real-world-experiments) · [Citation](#citation)
+[Overview](#overview) · [Architecture](#architecture) · [CARLA Simulation](#carla-simulation) · [Real-World Experiments](#real-world-experiments) · [Citation](#citation)
 
 **Code coming soon** · arXiv link to be added
 
 </div>
 
-> **TL;DR:** OpenMAMS aggregates distributed UAV memories for long-horizon question answering. Our memory-centric framework measures what each candidate memory adds, then jointly selects UAVs and allocates transmit power under communication constraints.
+> OpenMAMS aggregates distributed UAV memories for long-horizon question answering. Our memory-centric framework measures what each candidate memory adds, then jointly selects UAVs and allocates transmit power under communication constraints.
 
 ## Overview
 
@@ -44,6 +44,20 @@ GAE generates questions grounded in candidate observations and tests whether the
 
 </details>
 
+## CARLA Simulation
+
+### Town04: multi-UAV inspection
+
+![CARLA Town04 map and point cloud showing the spawn locations of five UAVs.](assets/carla-town04.png)
+
+UAVs inspect different regions of Town04 and collect observations for memory construction. The illustrated five-UAV setup evaluates the value of complementary memories. Questions ask whether an object is present, where it is located, and which UAV observed it.
+
+### Town05: dynamic and heterogeneous UAVs
+
+![CARLA Town05 building geometry, ground station, and flight trajectories of four fixed-wing and six multirotor UAVs.](assets/carla-town05.png)
+
+Four fixed-wing and six multirotor UAVs conduct a 200-second search-and-rescue mission in Town05. Their trajectories, image workloads, and building blockage create varying communication conditions. MemCen selects complementary memories and adapts transmit power to support downstream question answering.
+
 ## Real-World Experiments
 
 ### Panoramic multi-agent system (PMAS)
@@ -65,8 +79,6 @@ A robot dog reuses aerial memory to answer environmental questions and navigate 
 | CARLA Town04 | Static communication conditions | **92.4%** |
 | CARLA Town05 | Dynamic channels, heterogeneous UAVs, and building blockage | **84.0%** |
 | PMAS | Real aerial observations with offline channel replay | **88.5%** |
-
-These values are reported in the paper under their respective evaluation protocols. Town05 and PMAS results are means over 20 random trials.
 
 ## Code
 
