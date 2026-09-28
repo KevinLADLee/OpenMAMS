@@ -89,4 +89,5 @@ The arXiv identifier and paper link will be added when available.
 
 ## Contact
 
-Corresponding author: **Shuai Wang** ([s.wang@siat.ac.cn](mailto:s.wang@siat.ac.cn)).
+- First author: **Chengyang Li** — GitHub: [KevinLADLee](https://github.com/KevinLADLee)
+- Corresponding author: **Shuai Wang** — GitHub: [bearswang](https://github.com/bearswang)
