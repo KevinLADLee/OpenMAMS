@@ -48,13 +48,22 @@ GAE generates questions grounded in candidate observations and tests whether the
 
 ### Town04: multi-UAV inspection
 
-![CARLA Town04 map and point cloud showing the spawn locations of five UAVs.](assets/carla-town04.png)
+[![CARLA Town04 ten-UAV demo showing UAV locations, image frames, and their associated captions.](assets/carla-town04.png)](assets/carla-town04.png)
 
-UAVs inspect different regions of Town04 and collect observations for memory construction. The illustrated five-UAV setup evaluates the value of complementary memories. Questions ask whether an object is present, where it is located, and which UAV observed it.
+Ten UAVs inspect different regions of Town04 and collect complementary observations for memory construction. The demo shows their locations, sample image frames, and associated captions. Questions ask whether an object is present, where it is located, and which UAV observed it.
 
 ### Town05: dynamic and heterogeneous UAVs
 
-![CARLA Town05 building geometry, ground station, and flight trajectories of four fixed-wing and six multirotor UAVs.](assets/carla-town05.png)
+<table>
+<tr>
+<td width="58%" align="center" valign="middle"><a href="assets/carla-town05.png"><img src="assets/carla-town05.png" width="100%" alt="CARLA Town05 building geometry, ground station, and flight trajectories of four fixed-wing and six multirotor UAVs."></a></td>
+<td width="42%" align="center" valign="middle"><a href="assets/carla-town05-blockage.png"><img src="assets/carla-town05-blockage.png" width="100%" alt="Time-varying blockage across the ten UAV links in Town05, with per-UAV blockage ratios."></a></td>
+</tr>
+<tr>
+<td align="center">UAV trajectories and ground station</td>
+<td align="center">Time-varying link blockage</td>
+</tr>
+</table>
 
 Four fixed-wing and six multirotor UAVs conduct a 200-second search-and-rescue mission in Town05. Their trajectories, image workloads, and building blockage create varying communication conditions. MemCen selects complementary memories and adapts transmit power to support downstream question answering.
 
