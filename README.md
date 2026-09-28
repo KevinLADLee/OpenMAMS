@@ -101,5 +101,5 @@ The arXiv identifier and paper link will be added when available.
 
 ## Contact
 
-- First author: **Chengyang Li** — GitHub: [KevinLADLee](https://github.com/KevinLADLee)
-- Corresponding author: **Shuai Wang** — GitHub: [bearswang](https://github.com/bearswang)
+- **Chengyang Li**: [KevinLADLee](https://github.com/KevinLADLee)
+- **Shuai Wang**: [bearswang](https://github.com/bearswang)
