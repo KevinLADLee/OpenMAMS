@@ -1,6 +1,6 @@
 <div align="center">
 
-# OpenMAMS
+# OpenMAMS： Open-Sourced Multi-Agent Memory System
 
 ### Memory in the Sky: Low-Altitude Question Answering with Multi-Agent Memory Aggregation
 
