@@ -97,6 +97,8 @@ The source code will be released in this repository. This initial version contai
 
 If you find this work useful, please cite:
 
+### arXiv version
+
 ```bibtex
 @misc{li2026memoryinthesky,
   title  = {Memory in the Sky: Low-Altitude Question Answering with Multi-Agent Memory Aggregation},
@@ -106,6 +108,17 @@ If you find this work useful, please cite:
   archivePrefix = {arXiv},
   primaryClass = {cs.RO},
   url    = {https://arxiv.org/abs/2609.35431}
+}
+```
+
+### Conference version (GLOBECOM 2026)
+
+```bibtex
+@inproceedings{li2026memory,
+  title={Memory centric power allocation for multi-agent embodied question answering},
+  author={C. Li and S. Wang and K. Ye and W. Yuan and B. Zhou and Y.-C. Wu and C. Xu and H. Arslan},
+  booktitle={Proc. GLOBECOM},
+  year={2026}
 }
 ```
 
