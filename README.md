@@ -12,7 +12,7 @@ Chengyang Li<sup>1</sup>, Yujie Wan<sup>2</sup>, Shuai Wang<sup>3</sup>, Kejiang
 
 [Overview](#overview) · [Architecture](#architecture) · [CARLA Simulation](#carla-simulation) · [Real-World Experiments](#real-world-experiments) · [Citation](#citation)
 
-**Code coming soon** · arXiv link to be added
+[arXiv:2609.35431](https://arxiv.org/abs/2609.35431) · [Paper PDF](https://arxiv.org/pdf/2609.35431) · **Code coming soon**
 
 </div>
 
@@ -102,11 +102,12 @@ If you find this work useful, please cite:
   title  = {Memory in the Sky: Low-Altitude Question Answering with Multi-Agent Memory Aggregation},
   author = {Li, Chengyang and Wan, Yujie and Wang, Shuai and Ye, Kejiang and Yuan, Weijie and Zhou, Boyu and Wu, Yik-Chung and Xu, Chengzhong and Arslan, Huseyin},
   year   = {2026},
-  note   = {Preprint}
+  eprint = {2609.35431},
+  archivePrefix = {arXiv},
+  primaryClass = {cs.RO},
+  url    = {https://arxiv.org/abs/2609.35431}
 }
 ```
-
-The arXiv identifier and paper link will be added when available.
 
 ## Contact
 
