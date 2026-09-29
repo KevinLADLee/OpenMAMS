@@ -1,0 +1,128 @@
+{
+  "scenario": {
+    "num_orbits": 20,
+    "sats_per_orbit": 20,
+    "total_satellites": 400,
+    "altitude_km": 509.0,
+    "inclination_degree": 53.0,
+    "mean_motion_rev_per_day": 15.19,
+    "orbit_period_minutes": 94.79921000658328,
+    "minimum_elevation_degree": 10.0,
+    "selected_minute": 16,
+    "hong_kong": {
+      "name": "Hong Kong",
+      "lat": 22.3193,
+      "lon": 114.1694,
+      "elevation_m": 30.0
+    },
+    "local_random_seed": 20260608,
+    "local_radius_km": 80.0,
+    "altitude_note": "Approximate altitude; TLE mean motion determines orbital propagation."
+  },
+  "visible_satellites": [
+    {
+      "sat_id": 238,
+      "orbit_id": 11,
+      "sat_in_orbit": 18,
+      "elevation_deg": 42.905612535713885,
+      "azimuth_deg": 20.197835847495263,
+      "range_km": 719.54,
+      "delay_ms": 2.400127090588783,
+      "sub_lat": 26.307376880821845,
+      "sub_lon": 115.85963828709089,
+      "east_km": 174.06092670541665,
+      "north_km": 443.952718373088
+    },
+    {
+      "sat_id": 65,
+      "orbit_id": 3,
+      "sat_in_orbit": 5,
+      "elevation_deg": 28.555899061252138,
+      "azimuth_deg": 152.47830416352355,
+      "range_km": 957.4809375,
+      "delay_ms": 3.193812625866659,
+      "sub_lat": 15.937501937605223,
+      "sub_lon": 117.53523395465675,
+      "east_km": 346.6139548243512,
+      "north_km": -710.4217603057864
+    },
+    {
+      "sat_id": 64,
+      "orbit_id": 3,
+      "sat_in_orbit": 4,
+      "elevation_deg": 15.759041047423837,
+      "azimuth_deg": 312.68401114643274,
+      "range_km": 1396.110125,
+      "delay_ms": 4.65692210642604,
+      "sub_lat": 29.53864546205379,
+      "sub_lon": 104.67372820033427,
+      "east_km": -977.8653375465916,
+      "north_km": 803.657536835828
+    },
+    {
+      "sat_id": 258,
+      "orbit_id": 12,
+      "sat_in_orbit": 18,
+      "elevation_deg": 12.760830473503775,
+      "azimuth_deg": 99.824205097166,
+      "range_km": 1551.55,
+      "delay_ms": 5.1754137190469285,
+      "sub_lat": 19.495354306454036,
+      "sub_lon": 127.4543625164294,
+      "east_km": 1368.086916807652,
+      "north_km": -314.3616346055365
+    },
+    {
+      "sat_id": 219,
+      "orbit_id": 10,
+      "sat_in_orbit": 19,
+      "elevation_deg": 11.658891295269877,
+      "azimuth_deg": 324.69260385833906,
+      "range_km": 1619.816125,
+      "delay_ms": 5.403125001230018,
+      "sub_lat": 32.80126973421797,
+      "sub_lon": 105.04828211403941,
+      "east_km": -939.293733874741,
+      "north_km": 1166.8528708131444
+    },
+    {
+      "sat_id": 84,
+      "orbit_id": 4,
+      "sat_in_orbit": 4,
+      "elevation_deg": 11.10471535922443,
+      "azimuth_deg": 2.826704523861042,
+      "range_km": 1654.884125,
+      "delay_ms": 5.520099258134106,
+      "sub_lat": 35.823444026841024,
+      "sub_lon": 114.9918764134191,
+      "east_km": 84.69871248714607,
+      "north_km": 1503.2813130679428
+    },
+    {
+      "sat_id": 237,
+      "orbit_id": 11,
+      "sat_in_orbit": 17,
+      "elevation_deg": 10.409093889430835,
+      "azimuth_deg": 227.85661335324278,
+      "range_km": 1694.33525,
+      "delay_ms": 5.651694046285847,
+      "sub_lat": 12.47814175036164,
+      "sub_lon": 103.57671785736017,
+      "east_km": -1090.8355846187615,
+      "north_km": -1095.5177363497419
+    },
+    {
+      "sat_id": 85,
+      "orbit_id": 4,
+      "sat_in_orbit": 5,
+      "elevation_deg": 10.296425650203243,
+      "azimuth_deg": 84.334176172845,
+      "range_km": 1704.6425,
+      "delay_ms": 5.686075331488159,
+      "sub_lat": 22.86627293545606,
+      "sub_lon": 129.42786371483453,
+      "east_km": 1571.3182896100452,
+      "north_km": 60.88902717496874
+    }
+  ]
+}

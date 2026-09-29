@@ -10,13 +10,18 @@ Chengyang Li<sup>1</sup>, Yujie Wan<sup>2</sup>, Shuai Wang<sup>3</sup>, Kejiang
 <sup>3</sup>Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences<br>
 <sup>4</sup>University of Macau · <sup>5</sup>Istanbul Medipol University
 
-[Overview](#overview) · [Architecture](#architecture) · [CARLA Simulation](#carla-simulation) · [Real-World Experiments](#real-world-experiments) · [Citation](#citation)
+[Overview](#overview) · [Architecture](#architecture) · [CARLA Simulation](#carla-simulation) · [Real-World Experiments](#real-world-experiments) · [MemNTN](#memory-native-non-terrestrial-networks) · [Citation](#citation)
 
-[arXiv:2609.35431](https://arxiv.org/abs/2609.35431) · [Paper PDF](https://arxiv.org/pdf/2609.35431) · **Code coming soon**
+[arXiv:2609.35431](https://arxiv.org/abs/2609.35431) · [Paper PDF](https://arxiv.org/pdf/2609.35431)
 
 </div>
 
+![Town04 demo: four UAV views with captions](assets/town04_4uavs.gif)
+
+
 > OpenMAMS aggregates distributed UAV memories for long-horizon question answering. Our memory-centric framework measures what each candidate memory adds, then jointly selects UAVs and allocates transmit power under communication constraints.
+
+
 
 ## Overview
 
@@ -81,23 +86,54 @@ Three panoramic UAVs collect complementary observations along distinct routes. T
 
 A robot dog reuses aerial memory to answer environmental questions and navigate to a queried location.
 
+## Memory-Native Non-Terrestrial Networks
+
+MemNTN extends memory-based remote question answering to satellite networks through memory management, fusion, and valuation.
+
+[![MemNTN: UAV perception in Pittsburgh, a satellite constellation, and remote question answering in Istanbul.](assets/memntn_fig1.png)](assets/memntn_fig1.png)
+
+![MemNTN evaluation results: LEOPath and CARLA setup, the 400-satellite benchmark, and constellation-size comparisons.](assets/memntn_fig4.png)
+
+The LEOPath and CARLA evaluation compares remote question-answering accuracy and end-to-end throughput across satellite constellation sizes. MemNTN achieves 97.8% QA accuracy in the 400-satellite case, outperforming the compared baselines.
+
 ## Selected Results
 
 | Evaluation | Setting | MemCen QA accuracy |
 | --- | --- | ---: |
 | CARLA Town04 | Static communication conditions | **92.4%** |
 | CARLA Town05 | Dynamic channels, heterogeneous UAVs, and building blockage | **84.0%** |
-| PMAS | Real aerial observations with offline channel replay | **88.5%** |
+| PMAS  | Real aerial observations with offline channel replay | **88.5%** |
 
 ## Code
 
-The source code will be released in this repository. This initial version contains the paper overview and figures. Implementation and usage instructions will be added with the code release.
+The following modules are available and install independently:
+
+| Module | Contents | Usage |
+| --- | --- | --- |
+| `uav_data_recorder/` | Synchronized CARLA RGB images, camera poses, object ground truth | [Recorder guide](uav_data_recorder/README.md) |
+| `ntn/` | Satellite geometry, uplink/downlink scheduling, and FIFO image-delivery replay | [NTN guide](ntn/README.md) |
+
+### Demos
+
+
+![Town05 demo: ten UAV views with captions](assets/town05_10uavs.webp)
+
+| Demo | Duration | Frame rate | Resolution | Size |
+| --- | --- | --- | --- | --- |
+| [Town04, K=4](assets/town04_4uavs.gif) | 15 s | 10 FPS | 960 × 540 | 25.02 MB |
+| [Town05, K=10](assets/town05_10uavs.webp) | 15 s | 10 FPS | 1600 × 360 | 8.28 MB |
+
+
+
+The Town05 demo shows ten virtual UAV cameras following a closed road route in a
+5 × 2 layout. Captions update every three seconds. See the
+[asset descriptions](assets/README.md) for recording details.
 
 ## Citation
 
 If you find this work useful, please cite:
 
-### arXiv version
+### Journal version
 
 ```bibtex
 @misc{li2026memoryinthesky,
@@ -111,13 +147,24 @@ If you find this work useful, please cite:
 }
 ```
 
-### Conference version (GLOBECOM 2026)
+### Conference version
 
 ```bibtex
 @inproceedings{li2026memory,
   title={Memory centric power allocation for multi-agent embodied question answering},
   author={C. Li and S. Wang and K. Ye and W. Yuan and B. Zhou and Y.-C. Wu and C. Xu and H. Arslan},
   booktitle={Proc. GLOBECOM},
+  year={2026}
+}
+```
+
+### Magazine version
+
+```bibtex
+@article{li2026memntn,
+  title={Memory-Native Non-Terrestrial Networks for Embodied Intelligence},
+  author={Li, Chengyang and Wang, Yikun and He, Jiahui and Wan, Yujie and Wang, Shuai and Wu, Yuan and Wu, Yik-Chung and Xu, Chengzhong and Arslan, Huseyin},
+  journal={IEEE Communications Standards Magazine},
   year={2026}
 }
 ```

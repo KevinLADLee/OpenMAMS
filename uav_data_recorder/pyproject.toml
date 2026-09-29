@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=77,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openmams-capture"
+version = "0.1.0"
+description = "Standalone CARLA multi-UAV RGB and pose capture"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {file = "LICENSE"}
+dependencies = ["numpy>=1.26,<3", "Pillow>=10,<13"]
+
+[project.optional-dependencies]
+carla = ["carla==0.9.16"]
+
+[project.scripts]
+openmams-record = "recorder.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["recorder*"]

@@ -30,3 +30,25 @@ logs/
 
 # Local handoff instructions
 PUSH_INSTRUCTIONS.md
+
+# Package builds and fetched dependencies
+*.egg-info/
+build/
+dist/
+third_party/
+*.db
+*.db.*
+*.log
+
+# Generated video files
+*.mp4
+
+# Local authentication files
+.ssh/
+credentials.json
+credentials.*.json
+id_rsa*
+id_ed25519*
+*.p12
+*.pfx
+*.bundle
