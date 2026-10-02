@@ -42,6 +42,7 @@ third_party/
 
 # Generated video files
 *.mp4
+!assets/pmas-semantic-map.mp4
 
 # Local authentication files
 .ssh/

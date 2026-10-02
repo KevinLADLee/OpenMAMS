@@ -16,8 +16,11 @@ Chengyang Li<sup>1</sup>, Yujie Wan<sup>2</sup>, Shuai Wang<sup>3</sup>, Kejiang
 
 </div>
 
-![Town04 demo: four UAV views with captions](assets/town04_4uavs.gif)
-
+<p align="center">
+  <a href="https://github.com/SIAT-INVS/OpenMAMS/raw/refs/heads/main/assets/pmas-semantic-map.mp4">
+    <img src="assets/pmas-semantic-map.webp" width="100%" alt="Panoramic multi-agent system: rotating COLMAP point cloud, three UAV trajectories, and semantic observation anchors.">
+  </a>
+</p>
 
 > OpenMAMS aggregates distributed UAV memories for long-horizon question answering. Our memory-centric framework measures what each candidate memory adds, then jointly selects UAVs and allocates transmit power under communication constraints.
 
@@ -115,15 +118,21 @@ The following modules are available and install independently:
 
 ### Demos
 
+#### Town04 · Four-UAV captioned views
 
-![Town05 demo: ten UAV views with captions](assets/town05_10uavs.webp)
+<p align="center">
+  <img src="assets/town04_4uavs.gif" width="100%" alt="Town04 demo: four UAV views with captions">
+</p>
 
-| Demo | Duration | Frame rate | Resolution | Size |
-| --- | --- | --- | --- | --- |
-| [Town04, K=4](assets/town04_4uavs.gif) | 15 s | 10 FPS | 960 × 540 | 25.02 MB |
-| [Town05, K=10](assets/town05_10uavs.webp) | 15 s | 10 FPS | 1600 × 360 | 8.28 MB |
+The Town04 demo shows four virtual UAV camera views in a 2 × 2 layout, with
+captions describing each UAV's observations. See the
+[asset descriptions](assets/README.md) for recording details.
 
+#### Town05 · Ten-UAV captioned views
 
+<p align="center">
+  <img src="assets/town05_10uavs.webp" width="100%" alt="Town05 demo: ten UAV views with captions">
+</p>
 
 The Town05 demo shows ten virtual UAV cameras following a closed road route in a
 5 × 2 layout. Captions update every three seconds. See the
