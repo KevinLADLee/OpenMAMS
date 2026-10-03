@@ -10,133 +10,188 @@ Chengyang Li<sup>1</sup>, Yujie Wan<sup>2</sup>, Shuai Wang<sup>3</sup>, Kejiang
 <sup>3</sup>Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences<br>
 <sup>4</sup>University of Macau · <sup>5</sup>Istanbul Medipol University
 
-[Overview](#overview) · [Architecture](#architecture) · [CARLA Simulation](#carla-simulation) · [Real-World Experiments](#real-world-experiments) · [MemNTN](#memory-native-non-terrestrial-networks) · [Citation](#citation)
+[Overview](https://siat-invs.github.io/OpenMAMS-project/#overview) · [Architecture](https://siat-invs.github.io/OpenMAMS-project/#architecture) · [CARLA Simulation](https://siat-invs.github.io/OpenMAMS-project/#carla-simulation) · [Real-World Experiments](https://siat-invs.github.io/OpenMAMS-project/#real-world-experiments) · [MemNTN](https://siat-invs.github.io/OpenMAMS-project/#memory-native-non-terrestrial-networks) · [Citation](#citation)
 
-[arXiv:2609.35431](https://arxiv.org/abs/2609.35431) · [Paper PDF](https://arxiv.org/pdf/2609.35431)
+[Project Website](https://siat-invs.github.io/OpenMAMS-project/) · [arXiv:2609.35431](https://arxiv.org/abs/2609.35431) · [Paper PDF](https://arxiv.org/pdf/2609.35431)
 
 </div>
 
 <p align="center">
-  <a href="https://github.com/SIAT-INVS/OpenMAMS/raw/refs/heads/main/assets/pmas-semantic-map.mp4">
-    <img src="assets/pmas-semantic-map.webp" width="100%" alt="Panoramic multi-agent system: rotating COLMAP point cloud, three UAV trajectories, and semantic observation anchors.">
+  <a href="https://siat-invs.github.io/OpenMAMS-project/assets/pmas-semantic-map.mp4">
+    <img src="https://raw.githubusercontent.com/SIAT-INVS/OpenMAMS/3642621d91033dad838365b642a05a5b9e735e8c/assets/pmas-semantic-map.webp" width="100%" alt="Panoramic multi-agent system: rotating COLMAP point cloud, three UAV trajectories, and semantic observation anchors.">
   </a>
+</p>
+
+<p align="center">
+  <a href="https://siat-invs.github.io/OpenMAMS-project/assets/pmas-semantic-map.mp4">▶ Watch the full video</a>
 </p>
 
 > OpenMAMS aggregates distributed UAV memories for long-horizon question answering. Our memory-centric framework measures what each candidate memory adds, then jointly selects UAVs and allocates transmit power under communication constraints.
 
-
-
-## Overview
-
-OpenMAMS is the multi-agent memory system and benchmarking platform developed for **low-altitude question answering (LAQA)**. It connects aerial observations with a ground memory server so that users can ask about objects, locations, and events observed over time.
-
-The platform described in the paper supports:
-
-- **Multi-agent data collection:** images, timestamps, 6D poses, and LiDAR point clouds in CARLA.
-- **Memory construction and retrieval:** VLM captioning, text embeddings, and a vector database for spatiotemporal queries.
-- **Memory quality evaluation:** a generative adversarial exam (GAE) measures the knowledge gap between candidate observations and the current memory.
-- **Memory-centric resource allocation:** MemCen jointly selects UAV memories and allocates transmit power, with penalty successive optimization (PSO) and learning to memorize (L2M) solvers.
-
-## Architecture
-
-![LAQA architecture: distributed UAV observations are uploaded to a ground server for memory construction and question answering.](assets/architecture.png)
-
-Selected observations are captioned and stored with their timestamps and poses. The resulting global memory supports retrieval-augmented question answering.
-
-<details>
-<summary><strong>How does GAE evaluate a candidate memory?</strong></summary>
-
-![GAE pipeline with pilot upload, exam generation, and practice testing against the current memory.](assets/generative-adversarial-exam.png)
-
-GAE generates questions grounded in candidate observations and tests whether the current global memory can answer them. Unanswered questions reveal missing knowledge and quantify the value of acquiring that candidate memory. MemCen combines this task utility with payload sizes, channel conditions, interference, and power constraints.
-
-</details>
-
-## CARLA Simulation
-
-### Town04: multi-UAV inspection
-
-[![CARLA Town04 ten-UAV demo showing UAV locations, image frames, and their associated captions.](assets/carla-town04.png)](assets/carla-town04.png)
-
-Ten UAVs inspect different regions of Town04 and collect complementary observations for memory construction. The demo shows their locations, sample image frames, and associated captions. Questions ask whether an object is present, where it is located, and which UAV observed it.
-
-### Town05: dynamic and heterogeneous UAVs
-
-<table>
-<tr>
-<td width="58%" align="center" valign="middle"><a href="assets/carla-town05.png"><img src="assets/carla-town05.png" width="100%" alt="CARLA Town05 building geometry, ground station, and flight trajectories of four fixed-wing and six multirotor UAVs."></a></td>
-<td width="42%" align="center" valign="middle"><a href="assets/carla-town05-blockage.png"><img src="assets/carla-town05-blockage.png" width="100%" alt="Time-varying blockage across the ten UAV links in Town05, with per-UAV blockage ratios."></a></td>
-</tr>
-<tr>
-<td align="center">UAV trajectories and ground station</td>
-<td align="center">Time-varying link blockage</td>
-</tr>
-</table>
-
-Four fixed-wing and six multirotor UAVs conduct a 200-second search-and-rescue mission in Town05. Their trajectories, image workloads, and building blockage create varying communication conditions. MemCen selects complementary memories and adapts transmit power to support downstream question answering.
-
-## Real-World Experiments
-
-### Panoramic multi-agent system (PMAS)
-
-![PMAS field experiment with three UAVs, reconstructed trajectories, onboard observations, and spatial question answering.](assets/pmas-benchmark.png)
-
-Three panoramic UAVs collect complementary observations along distinct routes. Their observations are registered in a shared 3D coordinate frame for object-presence and spatial-grounding questions. The aerial data are collected in the field, while communication is evaluated through offline channel replay.
-
-### UAV-to-ground-robot memory reuse
-
-![A robot dog answers questions and navigates to a basketball court using previously acquired UAV memory.](assets/uav-ground-robot.png)
-
-A robot dog reuses aerial memory to answer environmental questions and navigate to a queried location.
-
-## Memory-Native Non-Terrestrial Networks
-
-MemNTN extends memory-based remote question answering to satellite networks through memory management, fusion, and valuation.
-
-[![MemNTN: UAV perception in Pittsburgh, a satellite constellation, and remote question answering in Istanbul.](assets/memntn_fig1.png)](assets/memntn_fig1.png)
-
-![MemNTN evaluation results: LEOPath and CARLA setup, the 400-satellite benchmark, and constellation-size comparisons.](assets/memntn_fig4.png)
-
-The LEOPath and CARLA evaluation compares remote question-answering accuracy and end-to-end throughput across satellite constellation sizes. MemNTN achieves 97.8% QA accuracy in the 400-satellite case, outperforming the compared baselines.
-
-## Selected Results
-
-| Evaluation | Setting | MemCen QA accuracy |
-| --- | --- | ---: |
-| CARLA Town04 | Static communication conditions | **92.4%** |
-| CARLA Town05 | Dynamic channels, heterogeneous UAVs, and building blockage | **84.0%** |
-| PMAS  | Real aerial observations with offline channel replay | **88.5%** |
-
 ## Code
 
-The following modules are available and install independently:
+This repository contains the runnable code and setup instructions. Figures, videos,
+experimental results, and system demonstrations are on the [project website](https://siat-invs.github.io/OpenMAMS-project/).
 
-| Module | Contents | Usage |
+| Module | Contents | Guide |
 | --- | --- | --- |
-| `uav_data_recorder/` | Synchronized CARLA RGB images, camera poses, object ground truth | [Recorder guide](uav_data_recorder/README.md) |
-| `ntn/` | Satellite geometry, uplink/downlink scheduling, and FIFO image-delivery replay | [NTN guide](ntn/README.md) |
+| `uav_data_recorder/` | Synchronized CARLA RGB images, camera poses, routes, and object ground truth | [UAV data recorder](#uav-data-recorder) |
+| `ntn/` | Satellite geometry, uplink/downlink scheduling, and FIFO image-delivery replay | [Satellite backhaul](#satellite-backhaul) |
 
-### Demos
+The modules install independently and connect through recording files. This release
+contains the recorder and satellite backhaul tools; the paper's memory valuation,
+GAE, and MemCen optimization implementations are not included.
 
-#### Town04 · Four-UAV captioned views
+## Installation
 
-<p align="center">
-  <img src="assets/town04_4uavs.gif" width="100%" alt="Town04 demo: four UAV views with captions">
-</p>
+Use **Linux and Python 3.11**. For data collection, install the CARLA server and
+Town04/Town05 maps separately, with matching **CARLA 0.9.16** client/server versions.
+NumPy and Pillow support capture; NumPy and pandas support the NTN module.
 
-The Town04 demo shows four virtual UAV camera views in a 2 × 2 layout, with
-captions describing each UAV's observations. See the
-[asset descriptions](assets/README.md) for recording details.
+Run the following commands from the repository root:
 
-#### Town05 · Ten-UAV captioned views
+```bash
+git clone https://github.com/SIAT-INVS/OpenMAMS.git
+cd OpenMAMS
+python3.11 -m venv .venv
+source .venv/bin/activate
+pip install -e './uav_data_recorder[carla]' -e ./ntn
+```
 
-<p align="center">
-  <img src="assets/town05_10uavs.webp" width="100%" alt="Town05 demo: ten UAV views with captions">
-</p>
+If you only need one module, install just its path. CARLA is not required for
+satellite backhaul simulation or replaying an existing recording.
+All commands below also run from the repository root, with the environment activated.
 
-The Town05 demo shows ten virtual UAV cameras following a closed road route in a
-5 × 2 layout. Captions update every three seconds. See the
-[asset descriptions](assets/README.md) for recording details.
+## UAV data recorder
+
+Start CARLA in a separate terminal:
+
+```bash
+/path/to/CARLA/CarlaUE4.sh -RenderOffScreen -nosound -carla-rpc-port=2000
+```
+
+Collect four UAV views in Town04 for 30 seconds at 10 FPS per UAV:
+
+```bash
+openmams-record --map Town04 --uavs 4 --seconds 30 --fps 10 \
+  --speed 4.5 --altitude 17.5 --pitch -45 --objects 10 --output runs/town04
+```
+
+This produces 1,200 images. The included Town05 loop supports ten cameras:
+
+```bash
+openmams-record --map Town05 --route uav_data_recorder/routes/town05_loop.json \
+  --uavs 10 --seconds 15 --fps 10 --objects 10 --output runs/town05
+```
+
+This produces 1,500 images. FPS is measured **per UAV**; lower `--fps` or image
+resolution if CARLA rendering becomes unstable (for example, use `--fps 1` for K=10).
+
+### Routes and objects
+
+Automatic routes follow roads from separated starting points. `--seed` controls
+route choices and object placement; `--spawns 12 35 80 110` selects map-specific
+starting points. Automatic routes do not guarantee a loop.
+
+`--route uav_data_recorder/routes/town05_loop.json` uses the included **1,005.44 m
+closed loop**, with UAVs starting at equal distances along it. Use either `--route`
+or `--spawns`.
+
+Default speed is **4.5 m/s**, altitude **17.5 m above the road**, and camera pitch
+**−45°**. The recorder uses virtual cameras without flight dynamics.
+`--objects 10` places five colored cars, a fire truck, motorcycle, bus, taxi,
+and traffic cone along the routes, then saves their world coordinates for evaluation.
+Use a dedicated CARLA instance and a new output directory.
+
+### Recording output
+
+```text
+runs/town04/
+  capture.json                 # Parameters and completion status
+  frames.jsonl                 # Frame IDs, UAV IDs, timestamps, and camera poses
+  images/uav_01/000000.jpg
+  images/uav_02/000000.jpg
+  ...
+  objects.json                 # Object ground truth when --objects 10 is used
+```
+
+Each frame contains `id, uav_id, time_s, timestamp, world_frame, x, y, z, yaw, pitch, image`.
+Coordinates use CARLA world meters; yaw and pitch use degrees. `time_s` starts at
+zero for the recording, while `timestamp` is CARLA elapsed simulation time.
+Image paths are relative to the recording directory. A finished recording has
+`completed: true` in `capture.json`. Pass this output directory to [replay](#replay-a-recording).
+
+## Satellite backhaul
+
+Run the included 400-satellite example:
+
+```bash
+bash ntn/scripts/run_backhaul.sh runs/backhaul_400
+```
+
+Results are saved under `uplink/`, `downlink/`, and `effective/`. The `uid=1` rows in
+`effective/mac_user_qos.csv` give backhaul rates for Proportional Fair and Max-C/I.
+Backhaul capacity is the smaller endpoint mean rate and is held constant during
+replay; ISL capacity is assumed sufficient.
+
+### Generate a constellation
+
+The included snapshot needs no topology generator. To generate a new constellation:
+
+```bash
+bash ntn/scripts/setup_dependencies.sh --leopath
+openmams-ntn topology --planes 20 --sats-per-plane 20 --output runs/topology_400
+bash ntn/scripts/run_backhaul.sh runs/new_backhaul runs/topology_400
+```
+
+Use `--minute` to select a snapshot time. Generated files include `constellation.tle`,
+`hong_kong.json`, `istanbul.json`, and `topology.json`. To fetch the pinned LEOPath and
+OpenNTN repositories without installing them, run:
+
+```bash
+bash ntn/scripts/setup_dependencies.sh --fetch
+```
+
+Fetched source stays in ignored `ntn/third_party/`; the full OpenNTN PHY is optional.
+
+### Replay a recording
+
+```bash
+openmams-ntn replay --data runs/town04 \
+  --backhaul runs/backhaul_400/effective --scheduler 'Proportional Fair' \
+  --deadline-s 30 --output runs/received
+```
+
+Payload size defaults to the image file size. Use `--frame-bytes` for a fixed size,
+or `--propagation-ms` to add propagation delay. The deadline is measured from the
+start of the recording. Delivered images and original poses are saved in `images/`
+and `frames.jsonl`; `delivery.json` summarizes delivery, and `transmissions.jsonl`
+contains per-frame results. Use a new output directory for each run.
+
+| Command | Purpose |
+| --- | --- |
+| `openmams-ntn topology` | Generate satellite geometry |
+| `openmams-ntn endpoint` | Simulate an uplink or downlink endpoint |
+| `openmams-ntn combine` | Combine endpoint capacities |
+| `openmams-ntn replay` | Replay image transmission |
+
+Append `--help` to any command for its options, including `openmams-record --help`.
+
+### Tests
+
+```bash
+pip install -e './ntn[test]'
+python -m pytest ntn/tests -q
+```
+
+## Sources and licenses
+
+- Recorder: [MIT license](uav_data_recorder/LICENSE).
+- [LEOPath](https://github.com/Fundacio-i2CAT/LEOPath) (AGPL-3.0) and
+  [OpenNTN](https://github.com/ant-uni-bremen/OpenNTN) (MIT). Fetched repositories
+  retain their original licenses and copyright notices.
+- Building geometry: © OpenStreetMap contributors,
+  [ODbL](https://www.openstreetmap.org/copyright). Some heights use default estimates.
 
 ## Citation
 

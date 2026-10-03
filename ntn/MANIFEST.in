@@ -1,3 +1,2 @@
-include README.md
 recursive-include scripts *.sh
 recursive-include examples *.json *.csv
