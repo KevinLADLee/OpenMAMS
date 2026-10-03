@@ -5,8 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "openmams-remembr-qa"
 version = "0.1.0"
-description = "Multi-UAV caption, ReMEmbR retrieval and QA evaluation"
-readme = "README.md"
+description = "Multi-UAV memory construction, spatiotemporal retrieval and QA evaluation"
+readme = {text = "Installation and usage: https://github.com/KevinLADLee/OpenMAMS/tree/integrate-local-qa#multi-agent-question-answering", content-type = "text/markdown"}
 requires-python = ">=3.11,<3.12"
 license = {file = "LICENSE.md"}
 dependencies = [

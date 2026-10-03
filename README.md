@@ -30,20 +30,22 @@ Chengyang Li<sup>1</sup>, Yujie Wan<sup>2</sup>, Shuai Wang<sup>3</sup>, Kejiang
 
 ## Code
 
-This repository contains the runnable code and setup instructions. Figures, videos,
-experimental results, and system demonstrations are on the [project website](https://siat-invs.github.io/OpenMAMS-project/).
+OpenMAMS connects multi-UAV observation collection, shared memory construction,
+spatiotemporal question answering, and satellite-delivery replay in one research
+workflow. Figures, experimental results, and system demonstrations are on the
+[project website](https://siat-invs.github.io/OpenMAMS-project/).
 
 | Module | Contents | Guide |
 | --- | --- | --- |
 | `uav_data_recorder/` | Synchronized CARLA RGB images, camera poses, routes, and object ground truth | [UAV data recorder](#uav-data-recorder) |
 | `ntn/` | Satellite geometry, uplink/downlink scheduling, and FIFO image-delivery replay | [Satellite backhaul](#satellite-backhaul) |
-| `multi_agent_question_answering/` | VLM captioning, Milvus memory, ReMEmbR retrieval, and QA evaluation | [Multi-agent QA](#multi-agent-question-answering) |
+| `multi_agent_question_answering/` | Multi-UAV memory construction, spatiotemporal retrieval, and QA evaluation | [Multi-agent QA](#multi-agent-question-answering) |
 
 The modules install independently and connect through recording files. This release
 contains the recorder, satellite backhaul tools, and multi-UAV memory QA. The
 paper's memory valuation, GAE, and MemCen optimization implementations are not
-included. See [DEVELOPMENT.md](DEVELOPMENT.md) for the shared environment and
-recording → optional NTN delivery → memory construction → QA workflow.
+included. The available workflow is recording → optional NTN delivery → memory
+construction → QA.
 
 ## Installation
 
@@ -210,9 +212,62 @@ openmams-qa evaluate --db runs/qa_demo/memory.db --uavs 1 2 3 4 --questions mult
 To process a new recording, pass its completed capture directory to `build`.
 For satellite delivery experiments, use the replay output such as `runs/received`.
 Use a new output directory for every build. See the
-[QA guide](multi_agent_question_answering/README.md) for configuration, UAV
-filtering, evaluation, existing databases, and captioned videos.
+[QA options](#qa-options) for configuration, evaluation, and captioned videos.
 [VALIDATION.md](VALIDATION.md) records the sample inference checks and their scope.
+
+### QA options
+
+<details>
+<summary>Configuration, inputs, evaluation, existing databases, and video</summary>
+
+Model settings are in `multi_agent_question_answering/multi_agent_qa/config.json`.
+Use `openmams-qa --config my_config.json build ...` to load another configuration.
+`--uavs` restricts the memories available to retrieval before answering.
+
+Input requires a completed `capture.json`, `frames.jsonl`, and relative image paths.
+Each selected frame contributes a caption, UAV ID, timestamp, and camera pose.
+`--interval` controls caption sampling per UAV; `0` keeps every frame.
+Build outputs are `memory.db`, `captions.jsonl`, and `memory.json`, including model
+information and input hashes. Stored positions use `[camera_x, camera_y, yaw_radians]`.
+Capture times map to a fixed UTC date.
+
+Question files are JSON lists:
+
+```json
+[
+  {"id":"presence-green","question":"Is there a green car?","type":"exact","answer":"YES"},
+  {"id":"where-green","question":"Where was the green car observed? Return the observing camera's [x, y] coordinates.","type":"where","answer":[300.49,-354.65]},
+  {"id":"which-green","question":"Which UAVs observed a green car?","type":"uav_set","answer":[1]}
+]
+```
+
+Scoring uses yes/no match, XY distance ≤ 50 m, or exact UAV-ID set match.
+Where references must match the coordinate target requested in the question;
+our 22-question example uses observing camera positions. Evaluation records
+answers, retrieval traces, errors, and model metadata. Use `--timeout` to change
+the default 90-second limit per question.
+
+Existing databases require the original embedding configuration and a database
+filename matching the collection name. Databases without `memory.json` retain
+the legacy time offset `1721761000`; use `--time-offset` to override it.
+
+Render a recording as a captioned grid:
+
+```bash
+openmams-caption-video --data runs/town05 --output runs/town05_captioned.mp4 \
+  --work runs/town05_video --interval 3 --columns 5 --tile-width 640
+```
+
+Use `--model`, `--ollama`, or `--font` to override the defaults. Caption checkpoints
+are saved under `--work` and can resume after interruption. Use a new video output path.
+
+Run QA tests from the repository root:
+
+```bash
+python -m pytest multi_agent_question_answering/tests -q
+```
+
+</details>
 
 ## Sources and licenses
 
@@ -227,34 +282,12 @@ filtering, evaluation, existing databases, and captioned videos.
 
 ## Acknowledgements
 
-Our memory-based question-answering module builds on
-[ReMEmbR](https://github.com/NVIDIA-AI-IOT/remembr) by NVIDIA, including its
-caption-based spatiotemporal memory and agent-driven text, position, and time
-retrieval. We thank the ReMEmbR authors and contributors for making their research
-and implementation available. OpenMAMS extends this foundation with multi-UAV
-memory aggregation and filtering, updated model integrations, and reproducible
-data-ingestion and evaluation interfaces. Source provenance and maintenance edits
-are documented in the [QA module](multi_agent_question_answering/provenance.json),
-which retains the applicable [NVIDIA license](multi_agent_question_answering/LICENSE.md).
+We thank the authors and contributors of:
 
-We also acknowledge the following projects and their contributors:
-
-- The [Qwen team](https://github.com/QwenLM) provides
-  [Qwen3-VL](https://github.com/QwenLM/Qwen3-VL) and
-  [Qwen3](https://github.com/QwenLM/Qwen3), used for image captioning and
-  retrieval-based question answering in our default model configuration.
-- [CARLA](https://github.com/carla-simulator/carla) provides the simulation
-  environment for synchronized multi-UAV image and pose collection.
-- [CARLA Dataset Tools](https://github.com/KevinLADLee/carla_dataset_tools)
-  is acknowledged for its CARLA-based data-collection and labeling toolkit.
-- [LEOPath](https://github.com/Fundacio-i2CAT/LEOPath) supplies the constellation
-  TLE generator used by the optional satellite-topology workflow.
-- [OpenNTN](https://github.com/ant-uni-bremen/OpenNTN) provides an optional NTN
-  channel-model implementation referenced by our dependency setup. Its full PHY
-  is separate from the default snapshot-capacity replay.
-
-Third-party source and data attributions are documented in
-[Sources and licenses](#sources-and-licenses).
+- [ReMEmbR](https://github.com/NVIDIA-AI-IOT/remembr), for components reused in the QA implementation.
+- [Qwen3-VL](https://github.com/QwenLM/Qwen3-VL) and [Qwen3](https://github.com/QwenLM/Qwen3), for the default captioning and QA models.
+- [CARLA](https://github.com/carla-simulator/carla) and [CARLA Dataset Tools](https://github.com/KevinLADLee/carla_dataset_tools), for simulation and data-collection tools.
+- [LEOPath](https://github.com/Fundacio-i2CAT/LEOPath) and [OpenNTN](https://github.com/ant-uni-bremen/OpenNTN), for satellite-topology and optional channel-model tools.
 
 ## Citation
 
