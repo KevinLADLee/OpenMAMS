@@ -1,0 +1,168 @@
+[
+  {
+    "id": "q01",
+    "question": "Was a green car observed?",
+    "type": "exact",
+    "answer": "YES"
+  },
+  {
+    "id": "q02",
+    "question": "Was a blue car observed?",
+    "type": "exact",
+    "answer": "YES"
+  },
+  {
+    "id": "q03",
+    "question": "Was a white car observed?",
+    "type": "exact",
+    "answer": "YES"
+  },
+  {
+    "id": "q04",
+    "question": "Was a purple car observed?",
+    "type": "exact",
+    "answer": "YES"
+  },
+  {
+    "id": "q05",
+    "question": "Was a black car observed?",
+    "type": "exact",
+    "answer": "YES"
+  },
+  {
+    "id": "q06",
+    "question": "Was a fire truck observed?",
+    "type": "exact",
+    "answer": "YES"
+  },
+  {
+    "id": "q07",
+    "question": "Was a motorcycle observed?",
+    "type": "exact",
+    "answer": "YES"
+  },
+  {
+    "id": "q08",
+    "question": "Was a bus observed?",
+    "type": "exact",
+    "answer": "YES"
+  },
+  {
+    "id": "q09",
+    "question": "Was a taxi observed?",
+    "type": "exact",
+    "answer": "YES"
+  },
+  {
+    "id": "q10",
+    "question": "Was a traffic cone observed?",
+    "type": "exact",
+    "answer": "YES"
+  },
+  {
+    "id": "q11",
+    "question": "Which UAVs observed a green car? Return UAV IDs.",
+    "type": "uav_set",
+    "answer": [
+      1
+    ]
+  },
+  {
+    "id": "q12",
+    "question": "Which UAVs observed a bus? Return UAV IDs.",
+    "type": "uav_set",
+    "answer": [
+      2
+    ]
+  },
+  {
+    "id": "q13",
+    "question": "Where was the green car observed? Return the observing camera's [x, y] coordinates.",
+    "type": "where",
+    "answer": [
+      300.48974609375,
+      -354.6459045410156
+    ]
+  },
+  {
+    "id": "q14",
+    "question": "Where was the blue car observed? Return the observing camera's [x, y] coordinates.",
+    "type": "where",
+    "answer": [
+      96.40071868896484,
+      -354.2302551269531
+    ]
+  },
+  {
+    "id": "q15",
+    "question": "Where was the white car observed? Return the observing camera's [x, y] coordinates.",
+    "type": "where",
+    "answer": [
+      254.19677734375,
+      -364.2068176269531
+    ]
+  },
+  {
+    "id": "q16",
+    "question": "Where was the purple car observed? Return the observing camera's [x, y] coordinates.",
+    "type": "where",
+    "answer": [
+      361.8098449707031,
+      -172.09719848632812
+    ]
+  },
+  {
+    "id": "q17",
+    "question": "Where was the black car observed? Return the observing camera's [x, y] coordinates.",
+    "type": "where",
+    "answer": [
+      335.63018798828125,
+      -333.53369140625
+    ]
+  },
+  {
+    "id": "q18",
+    "question": "Where was the fire truck observed? Return the observing camera's [x, y] coordinates.",
+    "type": "where",
+    "answer": [
+      183.49632263183594,
+      -173.11216735839844
+    ]
+  },
+  {
+    "id": "q19",
+    "question": "Where was the motorcycle observed? Return the observing camera's [x, y] coordinates.",
+    "type": "where",
+    "answer": [
+      129.38710021972656,
+      -173.42013549804688
+    ]
+  },
+  {
+    "id": "q20",
+    "question": "Where was the bus observed? Return the observing camera's [x, y] coordinates.",
+    "type": "where",
+    "answer": [
+      214.78811645507812,
+      -172.9340362548828
+    ]
+  },
+  {
+    "id": "q21",
+    "question": "Where was the taxi observed? Return the observing camera's [x, y] coordinates.",
+    "type": "where",
+    "answer": [
+      352.2003479003906,
+      -194.8297576904297
+    ]
+  },
+  {
+    "id": "q22",
+    "question": "Where was the traffic cone observed? Return the observing camera's [x, y] coordinates.",
+    "type": "where",
+    "answer": [
+      165.48043823242188,
+      -368.0954895019531
+    ]
+  }
+]

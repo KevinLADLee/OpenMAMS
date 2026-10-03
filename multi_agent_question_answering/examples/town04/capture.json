@@ -1,0 +1,9 @@
+{
+  "completed": true,
+  "kind": "selected_demo_frames",
+  "map": "Town04",
+  "uavs": 4,
+  "selected_frames": 10,
+  "source_capture_fps": 10,
+  "note": "Ten nonuniformly sampled visibility examples, not a complete recording or a paper trial."
+}

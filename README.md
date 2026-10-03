@@ -10,7 +10,7 @@ Chengyang Li<sup>1</sup>, Yujie Wan<sup>2</sup>, Shuai Wang<sup>3</sup>, Kejiang
 <sup>3</sup>Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences<br>
 <sup>4</sup>University of Macau · <sup>5</sup>Istanbul Medipol University
 
-[Overview](#overview) · [Architecture](#architecture) · [CARLA Simulation](#carla-simulation) · [Real-World Experiments](#real-world-experiments) · [MemNTN](#memory-native-non-terrestrial-networks) · [Citation](#citation)
+[Overview](#overview) · [Architecture](#architecture) · [CARLA Simulation](#carla-simulation) · [Real-World Experiments](#real-world-experiments) · [MemNTN](#memory-native-non-terrestrial-networks) · [Acknowledgements](#acknowledgements) · [Citation](#citation)
 
 [arXiv:2609.35431](https://arxiv.org/abs/2609.35431) · [Paper PDF](https://arxiv.org/pdf/2609.35431)
 
@@ -109,12 +109,15 @@ The LEOPath and CARLA evaluation compares remote question-answering accuracy and
 
 ## Code
 
-The following modules are available and install independently:
+The following modules are available and install independently. See
+[DEVELOPMENT.md](DEVELOPMENT.md) for a shared development environment and the
+recording → optional NTN delivery → memory construction → QA workflow.
 
 | Module | Contents | Usage |
 | --- | --- | --- |
 | `uav_data_recorder/` | Synchronized CARLA RGB images, camera poses, object ground truth | [Recorder guide](uav_data_recorder/README.md) |
 | `ntn/` | Satellite geometry, uplink/downlink scheduling, and FIFO image-delivery replay | [NTN guide](ntn/README.md) |
+| `multi_agent_question_answering/` | VLM captioning, Milvus memory, ReMEmbR retrieval, and QA evaluation | [QA guide](multi_agent_question_answering/README.md) |
 
 ### Demos
 
@@ -137,6 +140,37 @@ captions describing each UAV's observations. See the
 The Town05 demo shows ten virtual UAV cameras following a closed road route in a
 5 × 2 layout. Captions update every three seconds. See the
 [asset descriptions](assets/README.md) for recording details.
+
+## Acknowledgements
+
+Our memory-based question-answering module builds on
+[ReMEmbR](https://github.com/NVIDIA-AI-IOT/remembr) by NVIDIA, including its
+caption-based spatiotemporal memory and agent-driven text, position, and time
+retrieval. We thank the ReMEmbR authors and contributors for making their research
+and implementation available. OpenMAMS extends this foundation with multi-UAV
+memory aggregation and filtering, updated model integrations, and reproducible
+data-ingestion and evaluation interfaces. Source provenance and maintenance edits
+are documented in the [QA module](multi_agent_question_answering/provenance.json),
+which retains the applicable [NVIDIA license](multi_agent_question_answering/LICENSE.md).
+
+We also acknowledge the following projects and their contributors:
+
+- The [Qwen team](https://github.com/QwenLM) provides
+  [Qwen3-VL](https://github.com/QwenLM/Qwen3-VL) and
+  [Qwen3](https://github.com/QwenLM/Qwen3), used for image captioning and
+  retrieval-based question answering in our default model configuration.
+- [CARLA](https://github.com/carla-simulator/carla) provides the simulation
+  environment for synchronized multi-UAV image and pose collection.
+- [CARLA Dataset Tools](https://github.com/KevinLADLee/carla_dataset_tools)
+  is acknowledged for its CARLA-based data-collection and labeling toolkit.
+- [LEOPath](https://github.com/Fundacio-i2CAT/LEOPath) supplies the constellation
+  TLE generator used by the optional satellite-topology workflow.
+- [OpenNTN](https://github.com/ant-uni-bremen/OpenNTN) provides an optional NTN
+  channel-model implementation referenced by our dependency setup. Its full PHY
+  is separate from the default snapshot-capacity replay.
+
+Third-party source and data attributions are also documented in the
+[NTN guide](ntn/README.md#sources) and [asset descriptions](assets/README.md).
 
 ## Citation
 

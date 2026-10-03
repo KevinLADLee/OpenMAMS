@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=77,<81"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openmams-remembr-qa"
+version = "0.1.0"
+description = "Multi-UAV caption, ReMEmbR retrieval and QA evaluation"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = {file = "LICENSE.md"}
+dependencies = [
+  "langchain-core==1.0.1", "langchain-community==0.4.1",
+  "langchain-ollama==1.0.0", "langchain-openai==1.0.1",
+  "langchain-huggingface==1.0.0", "langchain-milvus==0.2.2",
+  "langgraph==1.0.1", "langgraph-prebuilt==1.0.1",
+  "langgraph-checkpoint==3.0.0", "langgraph-sdk==0.2.9",
+  "pymilvus==2.6.2", "milvus-lite==2.5.1",
+  "sentence-transformers==5.1.2", "transformers==4.57.1",
+  "torch==2.9.0", "numpy==2.3.4", "Pillow==11.3.0",
+  "ollama==0.6.0", "PyYAML==6.0.3", "python-dotenv==1.2.1",
+  "setuptools>=77,<81",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+video = ["imageio-ffmpeg>=0.6,<0.7"]
+
+[project.scripts]
+openmams-qa = "multi_agent_qa.cli:main"
+openmams-caption-video = "multi_agent_qa.video:main"
+
+[tool.setuptools.packages.find]
+include = ["multi_agent_qa*", "remembr*"]
+
+[tool.setuptools.package-data]
+remembr = ["prompts/*.txt"]
+multi_agent_qa = ["config.json"]

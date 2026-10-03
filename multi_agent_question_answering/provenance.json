@@ -1,0 +1,104 @@
+{
+  "upstream": "https://github.com/KevinLADLee/remembr-invs",
+  "basis": "Retained local research snapshot; remote revision not independently verified",
+  "files": {
+    "remembr/agents/agent.py": {
+      "source": "computation/current_pipeline/remembr/agents/agent.py",
+      "sha256": "ee8dc0f66e170332592102d1e69091ee9734ff1f93a4819412dc7c9197e455fa"
+    },
+    "remembr/agents/remembr_agent.py": {
+      "source": "computation/current_pipeline/remembr/agents/remembr_agent.py",
+      "sha256": "a5c321defcda74aa9e7958a95ef8516a7884f5cd5a93ceba6f3f27f633eecd6c",
+      "source_sha256": "5e279d67c4523d551d144955693f40dfd5f3ace438a8d2ec02354364c3c0d256",
+      "edits": [
+        "Removed unused inspect(), deprecated llm_selector(), the standalone demo, and imports used only by removed code."
+      ]
+    },
+    "remembr/memory/memory.py": {
+      "source": "computation/current_pipeline/remembr/memory/memory.py",
+      "sha256": "56bb1b43a677f029edd6bfae4d355cdda28ecd2e72e55b398f21c02f3e21ee2c"
+    },
+    "remembr/memory/milvus_memory.py": {
+      "source": "computation/current_pipeline/remembr/memory/milvus_memory.py",
+      "sha256": "7d21f393a696b82ae5dd4d8c30d43913bb154a0a196f69bd7093fc1d6692f494",
+      "source_sha256": "00a37345bd787849acbc9df800dc55609fdb0cd17f513afc638ca579d8752dbc",
+      "edits": [
+        "Translated the event-loop docstring into English and removed a redundant inline comment."
+      ]
+    },
+    "remembr/tools/functions_wrapper.py": {
+      "source": "computation/current_pipeline/remembr/tools/functions_wrapper.py",
+      "sha256": "edd75ab6e9ce73c4783fb7b4a7fc8fed59d2a1876a279f7e7bf7f8a1a72b43b3",
+      "source_sha256": "cd74699fdcbefdcf032b91fac3301430fecae313d2bb4bf85a2c0cda76f4b5a0",
+      "edits": [
+        "Copy bound tool definitions before adding the default response tool; validate model tool fields and remove the interactive debugger from malformed-response handling.",
+        "Allow one schema-correction attempt with explicit model feedback before surfacing an invalid response; preserve bounded outer retries and question timeout."
+      ]
+    },
+    "remembr/tools/tools.py": {
+      "source": "computation/current_pipeline/remembr/tools/tools.py",
+      "sha256": "cb963fdd37d73a619daa99991b5d0ddbcd4c16bdad4268751cffcf6a291efee8"
+    },
+    "remembr/utils/util.py": {
+      "source": "computation/current_pipeline/remembr/utils/util.py",
+      "sha256": "6295a875ec1e42ae3b34bd7f67aa1e50b95ece2913164fd425737439f4323947",
+      "source_sha256": "bac4306c71f5e3226e48a4584971c7d30b541b957685a9126d645ef1a0e7ceb8",
+      "edits": [
+        "Removed unused get_frames() video reader and its imports; retained file_to_string()."
+      ]
+    },
+    "remembr/utils/logging.py": {
+      "source": "computation/current_pipeline/remembr/utils/logging.py",
+      "sha256": "6ea3cc8a455b5c70963614952e06fadd952537d79b948c24431495bf8bbb711c"
+    },
+    "remembr/factories.py": {
+      "source": "computation/current_pipeline/remembr/factories.py",
+      "sha256": "1a066de7dfb84426ae3733934074c635ee9966c636e3712a27d4bad42b548f19",
+      "source_sha256": "0fc547e03738dc15145ce25b0e7d50c4aad92995dcef17a6289c4b2d374777d4",
+      "edits": [
+        "Removed unused load_captioner() and load_components() factories, including unavailable captioner backends."
+      ]
+    },
+    "remembr/config/config_loader.py": {
+      "source": "computation/current_pipeline/remembr/config/config_loader.py",
+      "sha256": "454eb541cedf354ac91858db2e613f0eacf2a84e1a784728098d61e259ee8037"
+    },
+    "remembr/config/defaults.py": {
+      "source": "computation/current_pipeline/remembr/config/defaults.py",
+      "sha256": "3e1234f2175d492d9b56babf9f92dda060f32352908d00a191532448c87c2d41"
+    },
+    "remembr/config/__init__.py": {
+      "source": "computation/current_pipeline/remembr/config/__init__.py",
+      "sha256": "9577b128e8e515934c5208e343c530d3a888756df93d7ffedf6c09d62bfbeab9"
+    },
+    "remembr/prompts/agent_system_prompt.txt": {
+      "source": "computation/current_pipeline/remembr/prompts/agent_system_prompt.txt",
+      "sha256": "388e9164bf376912198209e99a14d136f948c3741e023a3897e4ac7317c15ca6"
+    },
+    "remembr/prompts/generate_system_prompt.txt": {
+      "source": "computation/current_pipeline/remembr/prompts/generate_system_prompt.txt",
+      "sha256": "1c179dfe17c9d23498f07cedd81fd456473fe7d277ea928f3905f506467ae7b4"
+    },
+    "remembr/prompts/agent_gen_system_prompt.txt": {
+      "source": "computation/current_pipeline/remembr/prompts/agent_gen_system_prompt.txt",
+      "sha256": "f3b61d11143538541e26e4d9372f4df8f3163b736402a515a21616bc1f4d682e"
+    },
+    "remembr/captioners/captioner.py": {
+      "source": "computation/current_pipeline/remembr/captioners/captioner.py",
+      "sha256": "dec6bb48678dab6fe00df016da258969619e11db0e70c196cc4a71daac9f98ee"
+    },
+    "remembr/captioners/ollama_captioner.py": {
+      "source": "computation/current_pipeline/remembr/captioners/ollama_captioner.py",
+      "sha256": "0c27284c953ea7238ab4f50078ca5a5deeea87174ebc03283a819aa4ce1a8a44",
+      "source_sha256": "0d53a4a21e211af31119d620be2ff87da27bd042a6bd06dc3b2ad603da537abd",
+      "edits": [
+        "Removed the standalone image-captioning demo; retained the OllamaCaptioner implementation."
+      ]
+    },
+    "multi_agent_qa/filtered_memory.py": {
+      "source": "computation/current_pipeline/src/agent_inference/multi_agent_inference.py",
+      "symbol": "DroneFilteredMemory",
+      "symbol_sha256": "18ec22e163a8022adc7191ccc9cafae04b00b8e3c0ef585bf13fc21330fa37ab"
+    }
+  }
+}
