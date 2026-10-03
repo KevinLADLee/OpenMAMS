@@ -70,7 +70,7 @@ per UAV. The video uses the recording's frame rate, including 2 FPS:
 ```bash
 pip install -e '.[video]'
 openmams-caption-video --data ../uav_data_recorder/runs/town05_k10_2fps/recording \
-  --output ../assets/town05_k10_captioned_2fps.mp4 \
+  --output runs/town05_k10_captioned_2fps.mp4 \
   --work runs/town05_k10_2fps_video --interval 3 --columns 5 --tile-width 640
 ```
 

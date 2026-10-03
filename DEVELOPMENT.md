@@ -19,8 +19,8 @@ pip install -e ./uav_data_recorder -e './ntn[test]' -e './multi_agent_question_a
 ```
 
 CARLA, Ollama models, and optional satellite dependencies require additional setup.
-Follow the [recorder guide](uav_data_recorder/README.md),
-[NTN guide](ntn/README.md), and [QA guide](multi_agent_question_answering/README.md).
+Follow the [recorder guide](README.md#uav-data-recorder),
+[NTN guide](README.md#satellite-backhaul), and [QA guide](multi_agent_question_answering/README.md).
 
 ## Included QA example
 

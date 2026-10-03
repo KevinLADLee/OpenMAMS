@@ -40,9 +40,13 @@ third_party/
 *.db.*
 *.log
 
-# Generated video files
+# Presentation assets are hosted in OpenMAMS-project
+/assets/
+/docs/
 *.mp4
-!assets/pmas-semantic-map.mp4
+*.webm
+*.gif
+*.webp
 
 # Local authentication files
 .ssh/

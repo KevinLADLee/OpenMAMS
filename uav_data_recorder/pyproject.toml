@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "openmams-capture"
 version = "0.1.0"
 description = "Standalone CARLA multi-UAV RGB and pose capture"
-readme = "README.md"
+readme = {text = "Installation and usage: https://github.com/SIAT-INVS/OpenMAMS#uav-data-recorder", content-type = "text/markdown"}
 requires-python = ">=3.10,<3.13"
 license = {file = "LICENSE"}
 dependencies = ["numpy>=1.26,<3", "Pillow>=10,<13"]

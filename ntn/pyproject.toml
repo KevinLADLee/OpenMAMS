@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "openmams-ntn"
 version = "0.1.0"
 description = "Satellite backhaul simulation and CARLA capture replay for OpenMAMS"
-readme = "README.md"
+readme = {text = "Installation and usage: https://github.com/SIAT-INVS/OpenMAMS#satellite-backhaul", content-type = "text/markdown"}
 requires-python = ">=3.11"
 dependencies = ["numpy>=1.26,<3", "pandas>=2.2,<3"]
 
