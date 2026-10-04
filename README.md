@@ -64,12 +64,10 @@ All commands below also run from the repository root, with the environment activ
 
 ## UAV data recorder
 
-The recorder supports two capture modes: ordinary perspective RGB images with
-`openmams-record`, and 360° panorama PNG sequences plus panorama videos with
-`openmams-record-panorama`. Captioned presentation videos are created separately
-by `openmams-panorama-demo`; they are not the acquired sensor dataset.
-See the [single-frame samples](samples/README.md) for three panoramic UAV views
-and ten ordinary UAV views, with capture parameters and camera poses (~9 MB total).
+Use `openmams-record` for perspective RGB images, `openmams-record-panorama` for
+360° images and videos, and `openmams-panorama-demo` for captioned FPV demos.
+[Single-frame samples](samples/README.md) include three panoramic and ten
+perspective UAV views with poses and capture parameters (~9 MB).
 
 Start CARLA in a separate terminal:
 
@@ -130,11 +128,9 @@ Image paths are relative to the recording directory. A finished recording has
 
 ### 360° panorama dataset capture (`panorama.py`)
 
-The optional panorama recorder uses **six co-located 90° RGB cameras per UAV**
-(front/right/back/left/up/down). It checks every face's world frame, timestamp,
-position and orientation before stitching a **2:1 equirectangular panorama**.
-It saves **pure panorama video and every panorama frame**, without FPV panels,
-captions, layout, or playback speed changes. See [CARLA's RGB camera reference](https://carla.readthedocs.io/en/0.9.16/ref_sensors/#rgb-camera).
+Six synchronized 90° RGB cameras per UAV produce **2:1 equirectangular panoramas**.
+The recorder saves every frame as PNG and a panorama MP4 per UAV, without captions
+or layout overlays.
 
 Install the optional dependencies and start a dedicated CARLA 0.9.16 server:
 
@@ -152,54 +148,37 @@ openmams-record-panorama --port 2010 --map Town05 \
   --face-size 768 --pano-width 2048 --output runs/town05_panorama
 ```
 
-Each virtual UAV starts one-third of the loop apart. Altitude is relative to the
-route; pitch is degrees (negative points down). These are kinematic camera rigs,
-**not simulated UAV flight dynamics**, and UAV bodies are not rendered. The scene
-uses the map's existing objects; this command does not spawn benchmark targets.
-All faces share manual exposure (ISO 100, shutter 1/200 s, f/4), with motion blur
-and lens distortion disabled. This avoids independent exposure adaptation while
-retaining tone mapping. Cubemap interpolation and screen-space rendering effects
-can still produce subtle face seams.
-The dedicated simulator's weather/settings are restored and owned sensors are
-destroyed on exit. A fresh output directory is required; failed runs remain marked
-`completed: false`.
+UAVs start at equal distances along the loop, 12 m above the road. All camera
+faces share manual exposure; subtle cubemap seams may remain. This mode uses
+existing map objects and requires a fresh output directory.
 
 Output contains:
 
 ```text
 runs/town05_panorama/
-  capture.json                      # Capture parameters and completion flag
-  route.json                        # Exact source route
-  frames.jsonl                      # Pose, time, frame IDs, PNG/video path per UAV/frame
-  uav1_panorama.mp4                 # Pure 2048×1024 panorama, 40 s, 15 FPS
+  capture.json                     # Parameters and completion status
+  route.json                       # Source route
+  frames.jsonl                     # Poses, timestamps, frame IDs, and image/video paths
+  uav1_panorama.mp4                 # 2048×1024, 40 s, 15 FPS
   uav2_panorama.mp4
   uav3_panorama.mp4
   panorama_frames/
-    uav1/000000.png ... 000599.png  # Every full-resolution panorama, lossless PNG
+    uav1/000000.png ... 000599.png
     uav2/000000.png ... 000599.png
     uav3/000000.png ... 000599.png
-  previews/                        # Three panorama previews and first cube faces
+  previews/
 ```
 
-The default capture writes **600 PNGs per UAV, 1800 PNGs total**, plus three
-40-second videos. The PNGs preserve the stitched RGB pixels without further
-compression loss. MP4 uses H.264 CRF 19 / YUV 4:2:0 and is a **lossy playback
-copy**, not a lossless sensor archive. Here "raw panorama" means uncaptioned,
-uncomposited spherical imagery, not the original six camera buffers. Full six-face
-image sequences are not saved. Reserve substantially more disk space for the
-complete PNG dataset than for a presentation MP4.
-
-Run as a module with `python -m recorder.panorama` after installation. The capture
-manifest uses `schema_version: 2`; frame indexes are zero-based and correspond
-one-to-one to MP4 frames and `frames.jsonl` records. Never reuse an existing output
-directory.
+The example writes **600 PNGs per UAV (1800 total)** plus three videos. PNGs
+preserve the stitched pixels losslessly; H.264 MP4s are lossy playback copies.
+The original six-face sequences are not saved. All UAVs share world frame IDs
+and timestamps. Panorama output uses schema v2 and is not compatible with the
+ordinary RGB [satellite replay](#replay-a-recording) input format.
 
 ### Captioned presentation video (`demo.py`)
 
-`demo.py` reads the captured panorama PNGs, derives a square **90° rectified FPV**
-from each panorama, then adds captions and the three-column layout. It does not
-connect to CARLA or overwrite the acquired dataset. Install/start Ollama separately
-and pull the VLM:
+`demo.py` derives **90° rectified FPV** views from the panorama PNGs and adds
+offline Qwen3-VL 8B captions. Install and start Ollama, then run:
 
 ```bash
 ollama pull qwen3-vl:8b-instruct
@@ -207,26 +186,15 @@ openmams-panorama-demo --capture runs/town05_panorama \
   --playback-speed 2 --interval 8 --fpv-pitch -20
 ```
 
-This produces `demo/three_uav_carla_panorama_fpv_captioned_1080p.mp4`: **1920×1080,
-20 seconds, 30 FPS**, with columns UAV1/UAV2/UAV3, panorama above FPV, and no
-cropping or stretching. Each recorded frame is played once at 2× speed. Captions
-change every **4 playback seconds** (8 simulation seconds), using original
-Qwen3-VL 8B outputs in a top-aligned translucent black band with white bold text.
-Captioning is **offline**, not a real-time inference latency claim. Raw model
-responses, image/model hashes, sampled FPV images, the output manifest, and three
-preview frames are saved in `demo/`. All output frames are decoded to verify size,
-FPS and duration. Use a separate `--output path/demo.mp4` directory for a different
-FPV/caption configuration; incompatible cached frames/responses are rejected.
-Use `--font` for a different local DejaVu Sans Bold font path, `--ollama` for a
-different local endpoint, or `--ffmpeg` for an explicit FFmpeg binary. By default
-the FFmpeg binary is supplied by `imageio-ffmpeg`. You can also run
-`python -m recorder.demo`; the old `recorder.panorama_demo` module remains a
-compatibility entry point. Existing schema-v1 captures with
-`uavN_panorama_fpv_raw.mp4` and `caption_frames/` can still be rendered: omit
-`--interval` and `--fpv-pitch` because those settings were baked into the old data.
-Neither panorama schema is the ordinary image-recorder schema used by satellite replay.
-The website's 15-second clips are separately trimmed/compressed presentation copies;
-they do not change capture defaults or shorten the stored dataset.
+For the 40-second capture above, output is
+`demo/three_uav_carla_panorama_fpv_captioned_1080p.mp4`: **1920×1080, 20 s, 30 FPS**.
+Three columns show UAV1–UAV3, with panorama above FPV; captions update every
+4 playback seconds. Sampled FPV images, model responses, and previews are saved
+in `demo/` without modifying the source capture.
+
+Use `--output` in a new directory when changing FPV/caption settings. `--font`,
+`--ollama`, and `--ffmpeg` override local defaults. For legacy schema-v1 captures,
+omit `--interval` and `--fpv-pitch` to use the recorded settings.
 
 CPU-only projection/synchronization tests (CARLA-basis tests skip if unavailable):
 
