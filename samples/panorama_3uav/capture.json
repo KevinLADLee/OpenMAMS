@@ -1,0 +1,34 @@
+{
+  "schema_version": 2,
+  "completed": true,
+  "map": "Town05",
+  "uavs": 3,
+  "frames_per_uav": 1,
+  "fps": 15,
+  "duration_s": 0.06666666666666667,
+  "face_size": 768,
+  "panorama_size": [
+    2048,
+    1024
+  ],
+  "panorama_video_pattern": "uav{uav}_panorama.mp4",
+  "panorama_frame_pattern": "panorama_frames/uav{uav}/{index:06d}.png",
+  "image_encoding": "Lossless PNG of every stitched panorama; no FPV or overlays",
+  "video_encoding": "H.264 CRF19 YUV420; lossy playback copy at original capture FPS",
+  "altitude_above_road_m": 12.0,
+  "speed_mps": 4.5,
+  "source": "CARLA synchronous sensor.camera.rgb, six co-located 90deg faces per UAV",
+  "camera_model": "Kinematic virtual UAV rigs; no flight dynamics or visible UAV bodies",
+  "synchronization": "All six faces of all UAVs have identical world_frame and timestamp",
+  "stitching": "Direction-vector cubemap to 2:1 equirectangular",
+  "photometry": "Shared manual exposure: ISO100, shutter200, f/4, compensation0, gamma2.2; no motion blur or lens distortion",
+  "route_length_m": 1005.4416721521776,
+  "route_offsets_m": [
+    0.0,
+    335.14722405072587,
+    670.2944481014517
+  ],
+  "carla_client_version": "0.9.16",
+  "carla_server_version": "0.9.16",
+  "start_timestamp": 2.6746694487519562
+}

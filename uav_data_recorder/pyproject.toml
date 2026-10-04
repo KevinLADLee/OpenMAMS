@@ -13,9 +13,12 @@ dependencies = ["numpy>=1.26,<3", "Pillow>=10,<13"]
 
 [project.optional-dependencies]
 carla = ["carla==0.9.16"]
+panorama = ["opencv-python-headless>=4.10,<5", "requests>=2.31,<3", "imageio-ffmpeg>=0.5,<1"]
 
 [project.scripts]
 openmams-record = "recorder.cli:main"
+openmams-record-panorama = "recorder.panorama:main"
+openmams-panorama-demo = "recorder.demo:main"
 
 [tool.setuptools.packages.find]
 include = ["recorder*"]
